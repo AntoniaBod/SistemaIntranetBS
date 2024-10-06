@@ -1,0 +1,312 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Evita que a barra de rolagem apareça na tela */
+}
+
+.container {
+    display: flex;
+    flex-direction: row; /* Barra lateral à esquerda */
+    min-height: 100vh;
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    background-color: #b30000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10; /* Para garantir que o header fique acima de outros elementos */
+}
+
+header .logo {
+    margin-top: 0px; /* Corrigido para não usar margem em excesso */
+    display: flex;
+    justify-content: left;
+    width: 100%; /* Garante que a logo ocupe o espaço total da barra */
+}
+
+header .logo img {
+    width: 60px;
+    margin-left: 20px;
+}
+
+header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.logout-icon {
+    width: 20px; /* Largura do ícone */
+    height: 20px; /* Altura do ícone */
+    margin-right: 20px; /* Margem à direita do ícone */
+}
+
+.logout-button {
+    padding: 8px 12px;
+    background-color: #f44336; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 16px; /* Tamanho do texto do botão */
+}
+
+.logout-button:hover {
+    background-color: #d32f2f; /* Cor do botão ao passar o mouse */
+}
+
+aside {
+    width: 150px;
+    background-color: #b30000;
+    height: calc(100vh - 70px); /* Ajuste da altura da barra lateral para não ultrapassar o header */
+    position: fixed;
+    top: 70px; /* Começa logo abaixo do header */
+    left: 0;
+    text-align: center;
+    padding-top: 20px;
+    overflow-y: auto; /* Adiciona rolagem caso o conteúdo ultrapasse a altura */
+}
+
+aside nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+aside nav ul li a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+aside nav ul li a:hover {
+    background-color: #444;
+}
+
+main {
+    flex: 1;
+    margin-left: 165px; /* Deixar espaço para a barra lateral */
+    padding: 20px;
+    margin-top: 70px; /* Deixar espaço para o header */
+    background-color: #fff;
+    height: calc(100vh - 70px); /* Ajusta a altura do main para ocupar o restante da tela */
+    overflow-y: auto; /* Permite rolagem apenas no conteúdo principal */
+}
+
+main h1 {
+    color: #b30000;
+}
+
+.references-list {
+    background-color: #FFF7BC;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.references-list .reference {
+    display: flex;
+    flex-direction: column; /* Alinha todos os elementos na coluna */
+    margin-bottom: 15px; /* Espaçamento entre cada grupo de inputs */
+}
+
+/* Exibe os labels */
+.references-list .labels {
+    display: flex; /* Alinha os labels horizontalmente */
+    justify-content: space-between; /* Distribui os labels igualmente */
+}
+
+.references-list .labels label {
+    font-weight: bold;
+    min-width: 150px; /* Largura mínima para cada label */
+}
+
+.references-list .inputs {
+    display: flex; /* Alinha os inputs horizontalmente */
+    justify-content: space-between; /* Distribui os inputs igualmente */
+}
+
+.references-list .reference input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 100%; /* Largura mínima para os inputs */
+}
+
+.references-list .reference .actions {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+    margin-top: 10px; /* Espaçamento acima dos botões */
+    justify-content: flex-start; /* Alinha os botões à esquerda */
+}
+
+.references-list .reference .actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.btn-add {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.btn-back {
+    background-color: #d3d3d3;
+    border: none;
+    padding: 10px 20px;
+}
+/* Estilo da barra de ações (pesquisar + incluir funcionário) */
+.actions-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* Estilo para a barra de pesquisa */
+.search-actions {
+    display: flex;
+    align-items: center;
+}
+
+.search-actions a {
+    text-decoration: none; /* Remove o sublinhado */
+    margin: 0 5px; /* Espaçamento entre os botões */
+    padding: 10px 15px; /* Tamanho do botão */
+    background-color: #007BFF; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Remove borda */
+    border-radius: 5px; /* Arredondar bordas */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+}
+
+.search-actions a:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}
+
+.input-search {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    width: 200px; /* Largura do campo de pesquisa */
+    margin-right: 10px; /* Espaço entre os elementos */
+}
+
+.btn-search  {
+    background-color: #007bff; /* Cor azul para o botão de pesquisar */
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px; /* Espaço entre o botão de pesquisa e o botão de inclusão */
+}
+
+.btn-search:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para o botão "Incluir Funcionário" */
+.btn-add {
+    background-color: #28a745; /* Verde para botão de inclusão */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+}
+
+/* Restante dos estilos... (Tabela, botões de ação, etc.) */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table td {
+    position: relative;
+}
+
+table td .btn-view, .btn-edit, .btn-delete {
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.btn-view {
+    background-color: #4CAF50; /* Cor para visualizar */
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-edit {
+    background-color: #FFC107; /* Cor para editar */
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-delete {
+    background-color: #F44336; /* Cor para excluir */
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.actions {
+    text-align: right; /* Alinha os botões à direita */
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination button {
+    margin: 0 5px;
+}
+.logout-button {
+    margin-left: 5px;
+    margin-right: 10px;
+    background: none; /* Remove o fundo do botão */
+    border: none; /* Remove a borda do botão */
+    cursor: pointer; /* Cursor de ponteiro ao passar sobre o botão */
+    padding: 0; /* Remove padding para que a imagem ocupe todo o espaço */
+}
+
+.logout-button img {
+    width: 20px; /* Ajuste a largura do ícone conforme necessário */
+    height: 20px; /* Ajuste a altura do ícone conforme necessário */
+}
