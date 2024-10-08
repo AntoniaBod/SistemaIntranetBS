@@ -30,3 +30,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+<?php
+session_start();
+include 'config/conexao.php'; // Conexão com o banco de dados
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $login = $_POST['login'];
+    $senha = $_POST['senha'];
+
+    // Consulta o banco de dados para verificar as credenciais e o perfil do funcionário
+    $sql = "
+        SELECT u.id_usuarios, f.nome, f.perfil, u.senha
+        FROM usuario u
+        JOIN funcionario f ON u.fk_funcionario = f.id_funcionario
+        WHERE u.login = ? AND f.status = 'ativo'
+    ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $login);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    // Verifica se o usuário existe e se a senha está correta
+    if ($user && password_verify($senha, $user['senha'])) {
+        // Armazena informações importantes na sessão
+        $_SESSION['user_id'] = $user['id_usuarios'];
+        $_SESSION['user_nome'] = $user['nome'];
+        $_SESSION['user_perfil'] = $user['perfil'];
+
+        // Redireciona de acordo com o perfil do funcionário
+        switch ($user['perfil']) {
+            case 'Administrador':
+                header('Location: dashboard_admin.php');
+                break;
+            case 'Cozinheiro':
+                header('Location: dashboard_cozinheiro.php');
+                break;
+            case 'Degustador':
+                header('Location: dashboard_degustador.php');
+                break;
+            case 'Editor':
+                header('Location: dashboard_editor.php');
+                break;
+            default:
+                // Caso o perfil não seja reconhecido
+                header('Location: login.php?erro=perfil');
+        }
+    } else {
+        // Caso o login falhe
+        header('Location: login.php?erro=login');
+    }
+}
+?>
+

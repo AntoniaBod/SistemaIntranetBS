@@ -17,5 +17,5 @@ if ($conn->connect_error) {
 $conn->set_charset("utf8");
 
 // Exemplo de mensagem de sucesso (opcional, pode remover após teste):
-// echo "Conexão realizada com sucesso!";
+echo "Conexão realizada com sucesso!";
 ?>

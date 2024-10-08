@@ -1,4 +1,4 @@
-/* Estilos gerais */
+/* Estilos gerais DAS BARRAS VERTICAL E HORIZONTAL */
 body {
     font-family: Arial, sans-serif;
     background-color: #f3f3f3;
@@ -95,6 +95,7 @@ aside nav ul li a:hover {
     background-color: #444;
 }
 
+/* ESTILOS DO MAIN*/
 main {
     flex: 1;
     margin-left: 165px; /* Deixar espaço para a barra lateral */

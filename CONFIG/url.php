@@ -1,6 +1,6 @@
 <?php
 // Definir o caminho base do sistema
-define('BASE_URL', 'http://localhost/sistema-intranet/'); // Alterar conforme a URL real do projeto
+define('BASE_URL', 'http://localhost/SistemaIntranetBS/'); // Alterar conforme a URL real do projeto
 
 // Função para gerar URLs absolutas
 function url($path = '') {
