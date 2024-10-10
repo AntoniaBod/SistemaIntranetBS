@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incluir Funcionário</title>
-    <link rel="stylesheet" href="../CSS/style1.css">
+    <link rel="stylesheet" href="C:\Users\antpa\OneDrive\Documentos\GitHub\SistemaIntranetBS\CSS\style1.css">
 </head>
 <body>
     <div class="container">
-        <?php include_once("../INCLUDES/headeradmin.php"); ?>
+        <?php include_once("../INCLUDES/headeradmin.php"); 
+        // Incluindo a conexão com o banco de dados
+        include('../CONFIG/conexao.php');
+
+        // Query para obter a lista de cargos
+        $sql = "SELECT id_cargo, nome FROM cargo";
+        $result = $conn->query($sql);?>
         <main>
             <h1>Incluir Funcionário</h1>
-            
-            <?php
-            // Incluindo a conexão com o banco de dados
-            include('../CONFIG/conexao.php');
-
-            // Query para obter a lista de cargos
-            $sql = "SELECT id_cargo, nome FROM cargo";
-            $result = $conn->query($sql);
-            ?>
            <div class="references-list">
                <form action="../CONFIG/processamento.php" method="POST">
                     <div class="reference">
@@ -54,9 +51,9 @@
                             </select>
                     </div> 
                 </form>
-                <button class="btn-back">VOLTAR</button>
-                <button a href="listarFunc.php" class="btn-back">SALVAR</button>
             </div>
+            <button class="btn-back">VOLTAR</button>
+            <button a href="listarFunc.php" class="btn-back">SALVAR</button>
             
         </main>
     </div>
