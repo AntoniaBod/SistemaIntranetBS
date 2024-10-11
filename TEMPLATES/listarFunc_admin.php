@@ -1,94 +1,152 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Funcionários</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/style1.css"> <!-- Adicione o caminho correto para o seu CSS -->
+    <title>Funcionários Cadastrados</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome para ícones -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Ajustes personalizados */
+        .sidebar {
+            height: 100vh;
+            padding-top: 20px;
+        }
+        .btn-sm {
+            margin-right: 5px;
+        }
+        .container-fluid {
+            padding-left: 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <?php include_once("../INCLUDES/headeradmin.php"); ?> <!-- Incluindo o header e o aside -->
 
-        <main>
-            <h1>Funcionários Cadastrados</h1>
-
-            <!-- Seção de pesquisa e inclusão de funcionário -->
-            <div class="actions-top">
-                <!-- Campo de pesquisa e botão de inclusão juntos, alinhados à direita -->
-                <div class="search-actions">
-                    <input type="text" placeholder="Pesquisar..." name="search" class="input-search">
-                    <button class="btn-search">🔍</button>
-                    <!-- Botão para incluir novo funcionário com link -->
-                    <a href="incluirFunc.php" class="btn-add">Incluir Funcionário +</a>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Barra Lateral -->
+            <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" href="#">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Cargos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Degustações</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Funcionários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Ingredientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">LivroBS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Medidas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Metas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Receitas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Restaurante</a>
+                        </li>
+                    </ul>
                 </div>
-            </div> 
+            </nav>
 
-            <h2>Selecione o funcionário para consultar os detalhes:</h2>
-            
-            <!-- Tabela para exibir a lista de funcionários -->
-            <table>
-                    <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Cargo</th>
-                <th>CPF</th>
-                <th>Data de Admissão</th>
-                <th>Salário</th>
-                <th>Contato</th> <!-- Nova coluna para contato -->
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // Incluindo a conexão com o banco de dados
-            include('../CONFIG/conexao.php');
+            <!-- Conteúdo Principal -->
+            <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
+                <div class="container mt-4">
+                    <h2 class="text-center">Funcionários Cadastrados</h2>
 
-            // Query para obter a lista de funcionários com seus cargos
-            $sql = "SELECT f.id_funcionario, f.nome, c.nome AS cargo, f.cpf, f.dt_adm, f.salario, f.contato 
-                    FROM funcionario f
-                    JOIN cargo c ON f.fk_cargo = c.id_cargo";
-            
-            $result = $conn->query($sql);
+                    <!-- Campo de busca e botão Incluir -->
+                    <div class="row justify-content-between mb-3">
+                        <div class="col-12 col-md-6">
+                            <input type="text" class="form-control" placeholder="Pesquisar...">
+                        </div>
+                        <div class="col-12 col-md-4 text-md-end">
+                            <button class="btn btn-primary mt-2 mt-md-0">Incluir Funcionário +</button>
+                        </div>
+                    </div>
 
-            // Verifica se há resultados na consulta
-            if ($result->num_rows > 0) {
-                // Exibe os funcionários em cada linha da tabela
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id_funcionario'] . "</td>";
-                    echo "<td>" . $row['nome'] . "</td>";
-                    echo "<td>" . $row['cargo'] . "</td>";
-                    echo "<td>" . $row['cpf'] . "</td>";
-                    echo "<td>" . date("d/m/Y", strtotime($row['dt_adm'])) . "</td>";
-                    echo "<td>R$ " . number_format($row['salario'], 2, ',', '.') . "</td>";
-                    echo "<td>" . $row['contato'] . "</td>"; // Exibindo o contato
-                    echo "<td>
-                        <a href='visualizarFunc.php?id=" . $row['id_funcionario'] . "' class='btn-view'>👁️</a>
-                        <a href='editarFunc.php?id=" . $row['id_funcionario'] . "' class='btn-edit'>✏️</a>
-                        <a href='../CONFIG/processamento.php?acao=excluir&id=" . $row['id_funcionario'] . "' class='btn-delete' onclick='return confirm(\"Tem certeza que deseja excluir este funcionário?\");'>🗑️</a>
-                    </td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='8'>Nenhum funcionário encontrado.</td></tr>"; // Ajuste o colspan
-            }
-            ?>
-        </tbody>
-
-            </table>
-
-            <!-- Paginação (se aplicável) -->
-            <div class="pagination">
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>...</button>
-                <button>50</button>
-            </div>
-        </main>
+                    <!-- Tabela Responsiva -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Cargo</th>
+                                    <th>CPF</th>
+                                    <th>Data de Admissão</th>
+                                    <th>Salário</th>
+                                    <th>Contato</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Joao Silva</td>
+                                    <td>Cozinheiro</td>
+                                    <td>12345678900</td>
+                                    <td>30/11/0001</td>
+                                    <td>R$ 2.500,00</td>
+                                    <td>---</td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Ernesto Carlos</td>
+                                    <td>Cozinheiro</td>
+                                    <td>08384984859</td>
+                                    <td>09/04/1980</td>
+                                    <td>R$ 3.000,00</td>
+                                    <td>---</td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- Outros registros de funcionários -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
