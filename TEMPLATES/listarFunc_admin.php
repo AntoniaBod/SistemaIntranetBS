@@ -13,7 +13,7 @@
 <body>
 <body>
 <body>
-    <header class= "" style="background-color: red;">
+    <header class= "" style="background:red">
         <div class="logo">
             <img src="../IMAGES/logo.jpeg" alt="Logo">
         </div>
@@ -86,15 +86,9 @@
                                     <td>R$ 2.500,00</td>
                                     <td>---</td>
                                     <td>
-                                        <button class="btn btn-success btn-sm">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <a href="visualizarCargo.php?id=2" class="btn-view">👁️</a>
+                                        <a href="editarCargo.php?id=2" class="btn-edit">✏️</a>
+                                        <a href="../CONFIG/processamento.php?acao=excluir&id=2" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este funcionário?');">🗑️</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -106,15 +100,9 @@
                                     <td>R$ 3.000,00</td>
                                     <td>---</td>
                                     <td>
-                                        <button class="btn btn-success btn-sm">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <a href="visualizarCargo.php?id=2" class="btn-view">👁️</a>
+                                        <a href="editarCargo.php?id=2" class="btn-edit">✏️</a>
+                                        <a href="../CONFIG/processamento.php?acao=excluir&id=2" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este funcionário?');">🗑️</a>
                                     </td>
                                 </tr>
                                 <!-- Outros registros de funcionários -->
