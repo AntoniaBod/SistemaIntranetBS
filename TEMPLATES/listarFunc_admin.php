@@ -1,67 +1,64 @@
+<?php
+session_start();
+include('../CONFIG/conexao.php'); // Incluindo a conexão com o banco de dados
+
+// Verificando se o ID do funcionário foi passado
+if (isset($_GET['id'])) {
+    $id_funcionario = $_GET['id'];
+
+    // Obtendo os detalhes do funcionário
+    $sql = "SELECT * FROM funcionario WHERE id_funcionario = ?";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("i", $id_funcionario);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $funcionario = $result->fetch_assoc();
+    
+    // Verifica se o funcionário foi encontrado
+    if (!$funcionario) {
+        // Redirecionar se não encontrar o funcionário
+        $_SESSION['mensagem'] = 'Funcionário não encontrado.';
+        header("Location: listarFunc_admin.php");
+        exit();
+    }
+} else {
+    // Redirecionar se o ID não for encontrado
+    header("Location: listarFunc_admin.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionários Cadastrados</title>
-    <link rel="stylesheet" href="../CSS/style1.css">
+    <link rel="stylesheet" href="../CSS/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome para ícones -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<body>
-<body>
-    <header class= "" style="background:red">
-        <div class="logo">
-            <img src="../IMAGES/logo.jpeg" alt="Logo">
-        </div>
-        <div class="user-info">
-            <span>UsernameAdm</span>
-            <button type="submit" class="logout-button">
-                <img src="../IMAGES/Log out.png" alt="Sair" class="logout-icon">
-            </button>
-        </div>
-    </header>
-
-    <!-- Layout principal com barra lateral e conteúdo -->
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Barra Lateral (Aside) -->
-            <aside class="col-md-2 p-2">
-                <nav>
-                    <ul>
-                        <li><a href="../TEMPLATES/listarCategoria.php">Categorias</a></li>
-                        <li><a href="../TEMPLATES/listarCargo.php">Cargos</a></li>
-                        <li><a href="#">Degustações</a></li>
-                        <li><a href="../TEMPLATES/listarFunc_admin.php">Funcionários</a></li>
-                        <li><a href="#">Ingredientes</a></li>
-                        <li><a href="#">LivroBS</a></li>
-                        <li><a href="#">Medidas</a></li>
-                        <li><a href="#">Metas</a></li>
-                        <li><a href="../TEMPLATES/listarReceitas.php">Receitas</a></li>
-                        <li><a href="../TEMPLATES/ListarRestaurante.php">Restaurante</a></li>
-                    </ul>
-                </nav>
-            </aside>
-
+        <div class="container">
+        <?php include_once("../INCLUDES/header.php"); ?>
+       
             <!-- Conteúdo Principal -->
             <main class="col-md-10 ms-sm-auto px-md-4">
-                <div class="container mt-4">
-                    <h2 class="text-center">Funcionários Cadastrados</h2>
-
-                    <!-- Campo de busca e botão Incluir -->
-                    <div class="row justify-content-between mb-3">
-                        <div class="col-12 col-md-6">
-                            <input type="text" class="form-control" placeholder="Pesquisar...">
-                        </div>
-                        <div class="col-12 col-md-4 text-md-end">
-                            <button class="btn btn-primary mt-2 mt-md-0">Incluir Funcionário +</button>
+            <div class="container mt-4">
+            <div class="row align-items-center mb-3">
+               <div class="col-md-auto">
+                   <h2 class="text-left">Funcionários Cadastrados</h2>
+            </div>
+                    <div class="col-md-auto ms-auto">
+                        <div class="input-group" >
+                            <input type="text" class="form-control input-search" name="search" placeholder="Pesquisar..." aria-label="Pesquisar" style="flex: 1; min-width: 200px;"> <!-- Ajuste o min-width conforme necessário -->
+                            <button class="btn-search btn btn-outline-secondary" type="button">🔍</button>
+                            <button class="btn-add btn-primary ms-2" onclick="window.location.href='/BSIntranetAntonia/TEMPLATES/incluirFunc.php'">Incluir Funcionário +</button>
                         </div>
                     </div>
-
-                    <!-- Tabela Responsiva -->
+                </div>
+            </div>
+                              <!-- Tabela Responsiva -->
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead class="table-dark">
@@ -77,34 +74,23 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php while($funcionario = $result->fetch_assoc()): ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Joao Silva</td>
-                                    <td>Cozinheiro</td>
-                                    <td>12345678900</td>
-                                    <td>30/11/0001</td>
-                                    <td>R$ 2.500,00</td>
-                                    <td>---</td>
+                                <td><?php echo $funcionario['id_funcionario']; ?></td>
+                                <td><?php echo htmlspecialchars($funcionario['nome']); ?></td>
+                                <td><?php echo htmlspecialchars($funcionario['fk_cargo']); ?></td>
+                                <td><?php echo htmlspecialchars($funcionario['cpf']); ?></td>
+                                <td><?php echo htmlspecialchars($funcionario['dt_adm']); ?></td>
+                                <td><?php echo htmlspecialchars($funcionario['salario']); ?></td>
+                                <td><?php echo htmlspecialchars($funcionario['contato']); ?></td>
                                     <td>
-                                        <a href="visualizarCargo.php?id=2" class="btn-view">👁️</a>
-                                        <a href="editarCargo.php?id=2" class="btn-edit">✏️</a>
-                                        <a href="../CONFIG/processamento.php?acao=excluir&id=2" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este funcionário?');">🗑️</a>
+                                        <a href="visualizarFunc.php?id=<?php echo $funcionario['id_funcionario']; ?>" class="btn-view">👁️</a>
+                                        <a href="editarFunc.php?id=<?php echo $funcionario['id_funcionario']; ?>" class="btn-edit">✏️</a>
+                                        <a href="../CONFIG/processamento.php?acao=excluir&id=<?php echo $funcionario['id_funcionario']; ?>"class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este funcionário?');">🗑️</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Ernesto Carlos</td>
-                                    <td>Cozinheiro</td>
-                                    <td>08384984859</td>
-                                    <td>09/04/1980</td>
-                                    <td>R$ 3.000,00</td>
-                                    <td>---</td>
-                                    <td>
-                                        <a href="visualizarCargo.php?id=2" class="btn-view">👁️</a>
-                                        <a href="editarCargo.php?id=2" class="btn-edit">✏️</a>
-                                        <a href="../CONFIG/processamento.php?acao=excluir&id=2" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este funcionário?');">🗑️</a>
-                                    </td>
-                                </tr>
+                               
+                                <?php endwhile; ?>
                                 <!-- Outros registros de funcionários -->
                             </tbody>
                         </table>
@@ -112,7 +98,7 @@
                 </div>
             </main>
         </div>
-    </div>
+   
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

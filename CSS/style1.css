@@ -1,91 +1,203 @@
-/* Estilos gerais DAS BARRAS VERTICAL E HORIZONTAL */
+/* Estilos para o Header */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+}
+
 header {
-    background-color: #990000; /* Cor de fundo do cabeçalho */
-    color: #fff;
+    width: 100%;
+    height: 70px;
+    background-color: #b30000;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10; /* Para garantir que o header fique acima de outros elementos */
+}
+
+aside {
+    width: 150px;
+    background-color: #b30000;
+    height: calc(100vh - 70px); /* Ajuste da altura da barra lateral para não ultrapassar o header */
+    position: fixed;
+    top: 70px; /* Começa logo abaixo do header */
+    left: 0;
+    text-align: center;
+    padding-top: 20px;
+    overflow-y: auto; /* Adiciona rolagem caso o conteúdo ultrapasse a altura */
+}
+
+
+aside nav ul {
+    list-style-type: none; /* Remove marcadores da lista */
+    padding: 0; /* Remove padding */
+    align-items: center;
+}
+
+aside nav ul li {
+    margin: 20px 0; /* Margem entre os itens */
+}
+
+aside nav ul li a {
+    color: white; /* Cor dos links */
+    text-decoration: none; /* Remove sublinhado */
+}
+
+/* Adicionando efeito hover nos links */
+aside nav ul li a:hover {
+    text-decoration: underline; /* Sublinha ao passar o mouse */
+}
+
+/* Logo */
+
+header .logo {
+    margin-top: 0px; /* Corrigido para não usar margem em excesso */
+    display: flex;
+    justify-content: left;
+    width: 100%; /* Garante que a logo ocupe o espaço total da barra */
+}
+
+header .logo img {
+    width: 60px;
+    margin-left: 20px;
+}
+
+.user-info {
+    display: flex; /* Alinha itens no user-info */
+    align-items: center; /* Centraliza verticalmente os itens */
 }
 
 .logout-button {
-    background: none;
+    padding: 8px 12px;
+    background-color: #f44336; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
     border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 16px; /* Tamanho do texto do botão */
 }
 
+.logout-button:hover {
+    background-color: #d32f2f; /* Cor do botão ao passar o mouse */
+}
 .logout-icon {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
+}
+main {
+    flex: 1;
+    margin-left: 10px; /* Deixar espaço para a barra lateral */
+    padding: 60px;
+    margin-top: 10px; /* Ajustado para ficar próximo ao cabeçalho */
+    background-color: #fff;
+    min-height: 100vh; /* Garante que o main ocupe toda a altura */
+    overflow-y: auto;
 }
 
-/* Barra lateral */
-aside {
-    background-color: #990000; /* Cor vermelha da barra lateral */
-    color: #fff;
+main h1 {
+    color: #b30000;
 }
 
-aside a {
-    color: #fff;
+.input-group {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente os elementos */
+}
+
+/* Ajuste dos botões de ações para cores específicas */
+.btn-view {
+    color: white;
+    background-color: green;
+    padding: 5px 10px;
+    border-radius: 5px;
     text-decoration: none;
-    display: block;
+}
+
+.btn-edit {
+    color: white;
+    background-color: yellow;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-delete {
+    color: white;
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Ajuste do botão de pesquisar e incluir para verde escuro */
+.btn-search, .btn-add {
+    background-color: #006400; /* Verde escuro */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-search:hover, .btn-add:hover {
+    background-color: #004b23; /* Tom mais escuro ao passar o mouse */
+}
+
+/* Posicionando os botões de pesquisar e incluir à direita, um ao lado do outro */
+.row.justify-content-between {
+    justify-content: space-between; /* Espaça adequadamente os elementos */
+}
+
+.row.justify-content-between .col-md-6 {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0px;
+
+}
+
+.input-search {
     padding: 10px;
-    font-size: 1.1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    margin-right: 20px;
 }
 
-aside a:hover {
-    background-color: #cc0000; /* Tom mais claro ao passar o mouse */
+
+
+/* Melhorando a responsividade da página */
+@media (max-width: 768px) {
+    aside {
+        display: none;
+    }
+
+    header {
+        height: auto;
+        padding: 10px;
+    }
+
+    .container-fluid {
+        padding: 0 10px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .row.justify-content-between .col-md-6 {
+        flex-direction: column;
+        gap: 10px; /* Espaço extra entre os botões ao empilhar */
+    }
+
+    .btn-search, .btn-add {
+        width: 100%;
+    }
 }
-
-/* Cabeçalho */
-
-/* Estilo da Tabela */
-.table-responsive {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-table {
-    width: 100%;
-    margin: auto;
-    border-collapse: collapse;
-}
-
-thead {
-    background-color: #333;
-    color: #fff;
-}
-
-tbody tr {
-    background-color: #f9f9f9;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-/* Estilo dos botões de ação */
-.btn-success {
-    background-color: #28a745; /* Verde */
-    border: none;
-}
-
-.btn-warning {
-    background-color: #ffc107; /* Amarelo */
-    border: none;
-}
-
-.btn-danger {
-    background-color: #dc3545; /* Vermelho */
-    border: none;
-}
-
-.btn-primary {
-    background-color: #0066cc; /* Azul para o botão 'Incluir Funcionário' */
-}
-
-/* Botão de logout */
-.logout-button img {
-    width: 20px;
-    height: 20px;
-}
-

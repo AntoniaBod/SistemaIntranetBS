@@ -1,93 +1,74 @@
 <?php
-
-// Função para cadastrar novos usuários
+session_start();
 include('conexao.php'); // Incluindo a conexão com o banco de dados
 
+// Verificando se a requisição é para incluir ou atualizar
+if (isset($_POST['incluir'])) {
+    // Inclusão de um novo funcionário
+    $nome = $_POST['nome'];
+    $fk_cargo = $_POST['fk_cargo'];
+    $cpf = $_POST['cpf'];
+    $dt_adm = $_POST['dt_adm'];
+    $salario = $_POST['salario'];
+    $contato = $_POST['contato'];
 
-// Função para incluir um novo funcionário
-function incluirFuncionario($nome, $fk_cargo, $cpf, $dt_adm, $salario) {
-    global $conn; // Usando a conexão global
-    // Query SQL para inserir funcionário
-    $sql = "INSERT INTO funcionario (nome, fk_cargo, cpf, dt_adm, salario) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sissi", $nome, $fk_cargo, $cpf, $dt_adm, $salario);
-    return $stmt->execute();
-}
+    $sql = "INSERT INTO funcionario (nome, fk_cargo, cpf, dt_adm, salario, contato) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("sissis", $nome, $fk_cargo, $cpf, $dt_adm, $salario, $contato);
+    $stmt->execute();
+    
+    $_SESSION['mensagem'] = 'Funcionário incluído com sucesso!';
+    header("Location: ../TEMPLATES/listarFunc_admin.php");
+    exit();
 
-// Verifica se o formulário foi enviado via POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['acao']) && $_POST['acao'] == 'incluir') {
-        // Pega os dados do formulário e garante que todos os campos obrigatórios estão presentes
-        $nome = $_POST['nome'] ?? null;
-        $cpf = $_POST['cpf'] ?? null;
-        $dt_adm = $_POST['dt_adm'] ?? null;
-        $salario = $_POST['salario'] ?? null;
-        $fk_cargo = $_POST['fk_cargo'] ?? null;
+} elseif(isset($_POST['editar'])) {
+    // Atualização de um funcionário existente
+    $id_funcionario = $_POST['id_funcionario'];
+    $nome = $_POST['nome'];
+    $fk_cargo = $_POST['fk_cargo'];
+    $cpf = $_POST['cpf'];
+    $dt_adm = $_POST['dt_adm'];
+    $salario = $_POST['salario'];
+    $contato = $_POST['contato'];
 
-        // Verifica se todos os campos obrigatórios estão preenchidos
-        if ($nome && $cpf && $dt_adm && $salario && $fk_cargo) {
-            if (incluirFuncionario($nome, $fk_cargo, $cpf, $dt_adm, $salario)) {
-                header("Location: ../listarfunc.php"); // Redireciona para a lista de funcionários após inclusão bem-sucedida
-            } else {
-                echo "Erro: Falha ao incluir o funcionário."; // Mensagem de erro
-            }
-        } else {
-            echo "Erro: Todos os campos são obrigatórios."; // Mensagem de erro
-        }
+    // Adicionando um log para verificar os dados recebidos
+    error_log("Atualizando funcionário: $id_funcionario, Nome: $nome, Cargo: $fk_cargo, CPF: $cpf, Data de Admissão: $dt_adm, Salário: $salario, Contato: $contato");
+
+    $sql = "UPDATE funcionario SET nome = ?, fk_cargo = ?, cpf = ?, dt_adm = ?, salario = ?, contato = ? WHERE id_funcionario = ?";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("sissisi", $nome, $fk_cargo, $cpf, $dt_adm, $salario, $contato, $id_funcionario);
+    
+    if ($stmt->execute()) {
+        $_SESSION['mensagem'] = 'Dados do funcionário atualizados com sucesso!';
+    } else {
+        $_SESSION['mensagem'] = 'Erro ao atualizar os dados do funcionário. Erro: ' . $stmt->error;
     }
-
-
-// Função para editar um funcionário existente
-function editarFuncionario($id_funcionario, $nome, $fk_cargo, $cpf, $dt_adm, $salario) {
-    global $conn;
-    // Corrigido o campo 'fk_cargo'
-    $sql = "UPDATE funcionario SET nome = ?, fk_cargo = ?, cpf = ?, dt_adm = ?, salario = ? WHERE id_funcionario = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sissii", $nome, $fk_cargo, $cpf, $dt_adm, $salario, $id_funcionario);
-    return $stmt->execute();
+    
+    header("Location: ../TEMPLATES/listarFunc_admin.php");
+    exit();
 }
-
 // Função para excluir um funcionário
 function excluirFuncionario($id_funcionario) {
-    global $conn;
+    global $conexao; // Certifique-se de usar a variável de conexão correta
     $sql = "DELETE FROM funcionario WHERE id_funcionario = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $conexao->prepare($sql);
     $stmt->bind_param("i", $id_funcionario);
     return $stmt->execute();
 }
 
-
-// Função para obter os detalhes de um funcionário
-function obterFuncionario($id_funcionario) {
-    global $conn;
-    $sql = "SELECT * FROM funcionario WHERE id_funcionario = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id_funcionario);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
-}
-
-// Processar as ações com base no método HTTP
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['acao'])) {
-        switch ($_POST['acao']) {
-            case 'incluir':
-                incluirFuncionario($_POST['nome'], $_POST['fk_cargo'], $_POST['cpf'], $_POST['dt_adm'], $_POST['salario']);
-                header("Location: ../listarfunc.php");
-                break;
-
-            case 'editar':
-                editarFuncionario($_POST['id_funcionario'], $_POST['nome'], $_POST['fk_cargo'], $_POST['cpf'], $_POST['dt_adm'], $_POST['salario']);
-                header("Location: ../listarfunc.php");
-                break;
+// Processar ações
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['acao'])) {
+    if ($_GET['acao'] == 'excluir' && isset($_GET['id'])) {
+        if (excluirFuncionario($_GET['id'])) {
+            $_SESSION['mensagem'] = 'Funcionário excluído com sucesso!';
+        } else {
+            $_SESSION['mensagem'] = 'Erro ao excluir funcionário.';
         }
-    }
-} elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['acao'])) {
-    if ($_GET['acao'] == 'excluir') {
-        excluirFuncionario($_GET['id']);
-        header("Location: ../listarfunc.php");
+        header("Location: ../TEMPLATES/listarFunc_admin.php"); // Redireciona para a lista de funcionários
+        exit(); // Para garantir que o script não continue
     }
 }
+
 
 // CRUD para a tabela cargo
 
@@ -128,39 +109,4 @@ function obterCargo($id) {
     return $stmt->get_result()->fetch_assoc();
 }
 
-// Processar as ações com base no método HTTP
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['acao'])) {
-        switch ($_POST['acao']) {
-            case 'incluir':
-                incluirFuncionario($_POST['nome'], $_POST['cargo'], $_POST['cpf'], $_POST['dt_adm'], $_POST['salario']);
-                header("Location: ../listarfunc.php");
-                break;
-
-            case 'editar':
-                editarFuncionario($_POST['id'], $_POST['nome'], $_POST['cargo'], $_POST['cpf'], $_POST['dt_adm'], $_POST['salario']);
-                header("Location: ../listarfunc.php");
-                break;
-
-            case 'incluirCargo':
-                incluirCargo($_POST['nome'], $_POST['descricao']);
-                header("Location: ../listarCargo.php"); // Redirecionar para a lista de cargos
-                break;
-
-            case 'editarCargo':
-                editarCargo($_POST['id'], $_POST['nome'], $_POST['descricao']);
-                header("Location: ../listarCargo.php"); // Redirecionar para a lista de cargos
-                break;
-        }
-    }
-} elseif ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['acao'])) {
-    if ($_GET['acao'] == 'excluir') {
-        excluirFuncionario($_GET['id']);
-        header("Location: ../listarfunc.php");
-    } elseif ($_GET['acao'] == 'excluirCargo') {
-        excluirCargo($_GET['id']);
-        header("Location: ../listarCargo.php"); // Redirecionar para a lista de cargos
-    }
-}
-}
 ?>
