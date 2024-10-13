@@ -13,7 +13,7 @@
 <body>
 <body>
 <body>
-    <header>
+    <header class= "" style="background-color: red;">
         <div class="logo">
             <img src="../IMAGES/logo.jpeg" alt="Logo">
         </div>
@@ -29,7 +29,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Barra Lateral (Aside) -->
-            <aside class="col-md-2">
+            <aside class="col-md-2 p-2">
                 <nav>
                     <ul>
                         <li><a href="../TEMPLATES/listarCategoria.php">Categorias</a></li>

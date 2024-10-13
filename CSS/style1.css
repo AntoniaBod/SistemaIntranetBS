@@ -1,4 +1,22 @@
 /* Estilos gerais DAS BARRAS VERTICAL E HORIZONTAL */
+header {
+    background-color: #990000; /* Cor de fundo do cabeçalho */
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+}
+
+.logout-icon {
+    width: 25px;
+    height: 25px;
+}
+
 /* Barra lateral */
 aside {
     background-color: #990000; /* Cor vermelha da barra lateral */
@@ -18,23 +36,6 @@ aside a:hover {
 }
 
 /* Cabeçalho */
-header {
-    background-color: #990000; /* Cor de fundo do cabeçalho */
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.logout-button {
-    background: none;
-    border: none;
-}
-
-.logout-icon {
-    width: 25px;
-    height: 25px;
-}
 
 /* Estilo da Tabela */
 .table-responsive {
