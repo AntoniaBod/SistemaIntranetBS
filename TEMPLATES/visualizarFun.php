@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
 </head>
 <body>
     <div class="container">
-        <?php include_once("../INCLUDES/header.php"); ?> <!-- Incluindo o header -->
+        <?php include_once("../INCLUDES/headeradmin.php"); ?> <!-- Incluindo o header -->
         
         <!-- Conteúdo Principal -->
         <main>

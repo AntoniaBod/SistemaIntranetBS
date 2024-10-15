@@ -31,11 +31,11 @@ if (isset($_GET['id'])) {
 </head>
 <body>
         <div class="container">
-        <?php include_once("../INCLUDES/header.php"); ?> <!-- Incluindo o header e o aside -->
+        <?php include_once("../INCLUDES/headeradmin.php"); ?> <!-- Incluindo o header e o aside -->
             <!-- Conteúdo Principal -->
     <main>
     <div class="container mt-5">
-    <?php include_once("../INCLUDES/header.php"); 
+    <?php include_once("../INCLUDES/headeradmin.php"); 
         // Incluindo a conexão com o banco de dados
         include('../CONFIG/conexao.php');
 

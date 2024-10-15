@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
 </head>
 <body>
         <div class="container">
-        <?php include_once("../INCLUDES/header.php"); ?>
+        <?php include_once("../INCLUDES/headeradmin.php"); ?>
        
             <!-- Conteúdo Principal -->
             <main class="col-md-10 ms-sm-auto px-md-4">

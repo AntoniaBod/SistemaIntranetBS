@@ -10,7 +10,7 @@
 </head>
 <body>
         <div class="container">
-        <?php include_once("../INCLUDES/header.php"); ?> <!-- Incluindo o header e o aside -->
+        <?php include_once("../INCLUDES/headeradmin.php"); ?> <!-- Incluindo o header e o aside -->
             <!-- Conteúdo Principal -->
     <main>
     <div class="container mt-3">
