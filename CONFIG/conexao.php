@@ -6,16 +6,16 @@ $senha = "";              // Senha do banco de dados
 $banco = "acervoreceita"; // Nome do banco de dados
 
 // Criar a conexão com o banco de dados
-$conn = new mysqli($servidor, $usuario, $senha, $banco);
+$connexao = new mysqli($servidor, $usuario, $senha, $banco);
 
 // Verificar se a conexão foi bem-sucedida
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+if ($conexao->connect_error) {
+    die("Falha na conexão: " . $conexao->connect_error);
 }
 
 // Definir o charset para garantir a compatibilidade com caracteres especiais
-$conn->set_charset("utf8");
+$conexao->set_charset("utf8");
 
-// Exemplo de mensagem de sucesso (opcional, pode remover após teste):
-echo "Conexão realizada com sucesso!";
+/*// Exemplo de mensagem de sucesso (opcional, pode remover após teste):
+echo "Conexão realizada com sucesso!";*/
 ?>
