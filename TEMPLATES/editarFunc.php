@@ -30,18 +30,9 @@ if (isset($_GET['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-        <div class="container">
-        <?php include_once("../INCLUDES/headeradmin.php"); ?> <!-- Incluindo o header e o aside -->
-            <!-- Conteúdo Principal -->
+<div class="container"> 
     <main>
     <div class="container mt-5">
-    <?php include_once("../INCLUDES/headeradmin.php"); 
-        // Incluindo a conexão com o banco de dados
-        include('../CONFIG/conexao.php');
-
-        // Query para obter a lista de cargos
-        $sql = "SELECT id_cargo, nome FROM cargo";
-        $result = $conexao->query($sql);?>
         <h2 class="text-center">Editar Dados do Funcionário</h2>
         <form action="../CONFIG/processamento.php" method="POST">
             <div class="mb-3">
