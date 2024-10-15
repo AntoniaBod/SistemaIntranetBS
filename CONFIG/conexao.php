@@ -6,7 +6,7 @@ $senha = "";              // Senha do banco de dados
 $banco = "acervoreceita"; // Nome do banco de dados
 
 // Criar a conexão com o banco de dados
-$connexao = new mysqli($servidor, $usuario, $senha, $banco);
+$conexao = new mysqli($servidor, $usuario, $senha, $banco);
 
 // Verificar se a conexão foi bem-sucedida
 if ($conexao->connect_error) {
