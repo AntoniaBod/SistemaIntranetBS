@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca de Sabores - Login</title>
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">  
     <!-- Seu CSS customizado -->
     <link rel="stylesheet" href="/CSS/styleLogin.css"> <!-- Verifique se este caminho está correto -->
 </head>
@@ -21,7 +17,7 @@
         <div class="col-lg-6 d-none d-lg-flex left-section">
             <div>
                 <h1>Biblioteca de Sabores</h1>
-                <img src="/IMAGES/imagemlogin.jpeg" alt="Logo Biblioteca de Sabores" class="img-fluid">
+                <img src="IMAGES/imagemlogin.jpeg" alt="Logo Biblioteca de Sabores" class="img-fluid">
                 <!-- Certifique-se de que o caminho da imagem está correto -->
             </div>
         </div>
@@ -29,7 +25,7 @@
         <div class="col-lg-6 col-12 login-box d-flex align-items-center justify-content-center">
             <div>
                 <div class="profile-icon text-center">
-                    <img src="/IMAGES/perfil.png" alt="Ícone de Perfil" class="img-fluid" style="width: 100px;">
+                    <img src="IMAGES/perfil.png" alt="Ícone de Perfil" class="img-fluid" style="width: 100px;">
                     <!-- Certifique-se de que o caminho da imagem está correto -->
                 </div>
                 <h2 class="text-center">Bem-vindo!</h2>
