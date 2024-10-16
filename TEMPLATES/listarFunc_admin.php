@@ -25,7 +25,7 @@ $result = mysqli_query($conn, $query);
 <body>
 <div class="container">
         <?php include_once("../INCLUDES/headerAdmin.php"); ?>
-        <main class="col-md-11 ms-sm-auto px-md-4">
+        <main class="col-md-11 ms-sm-auto px-md-2">
             <div class="container mt-4">
                 <div class="row align-items-center mb-3">
                     <div class="col-md-auto">
@@ -81,3 +81,4 @@ $result = mysqli_query($conn, $query);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
