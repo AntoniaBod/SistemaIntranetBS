@@ -1,33 +1,3 @@
-<?php
-session_start();
-include('../CONFIG/conexao.php'); // Incluindo a conexão com o banco de dados
-
-// Verificando se o ID do funcionário foi passado
-if (isset($_GET['id'])) {
-    $id_funcionario = $_GET['id'];
-
-    // Obtendo os detalhes do funcionário
-    $sql = "SELECT * FROM funcionario WHERE id_funcionario = ?";
-    $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("i", $id_funcionario);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $funcionario = $result->fetch_assoc();
-    
-    // Verifica se o funcionário foi encontrado
-    if (!$funcionario) {
-        // Redirecionar se não encontrar o funcionário
-        $_SESSION['mensagem'] = 'Funcionário não encontrado.';
-        header("Location: listarFunc_admin.php");
-        exit();
-    }
-} else {
-    // Redirecionar se o ID não for encontrado
-    header("Location: listarFunc_admin.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -37,8 +7,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../CSS/style1.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
 </head>
 <body>
         <div class="container">
