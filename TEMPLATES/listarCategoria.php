@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <?php include_once("../INCLUDES/headeradmin.php"); ?> <!-- Incluindo o header e o aside -->
+        <?php include_once("../INCLUDES/headerAdmin.php"); ?> <!-- Incluindo o header e o aside -->
 
         <main>
             <h1>Categorias</h1>

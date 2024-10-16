@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionários Cadastrados</title>
-    <link rel="stylesheet" href="../CSS/style1.css">
+    <link rel="stylesheet" href="../CSS/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
 </head>
 <body>
         <div class="container">
-        <?php include_once("../INCLUDES/headeradmin.php"); ?>
+        <?php include_once("../INCLUDES/headerAdmin.php"); ?>
        
             <!-- Conteúdo Principal -->
             <main class="col-md-10 ms-sm-auto px-md-4">
