@@ -1,5 +1,5 @@
 /* Estilos para o Header */
-
+/* styleHeader.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #f3f3f3;
@@ -35,7 +35,6 @@ aside {
     overflow-y: auto; /* Adiciona rolagem caso o conteúdo ultrapasse a altura */
 }
 
-
 aside nav ul {
     list-style-type: none; /* Remove marcadores da lista */
     padding: 0; /* Remove padding */
@@ -57,7 +56,6 @@ aside nav ul li a:hover {
 }
 
 /* Logo */
-
 header .logo {
     margin-top: 0px; /* Corrigido para não usar margem em excesso */
     display: flex;
@@ -88,18 +86,20 @@ header .logo img {
 .logout-button:hover {
     background-color: #d32f2f; /* Cor do botão ao passar o mouse */
 }
+
 .logout-icon {
     width: 30px;
     height: 30px;
 }
+
 main {
     flex: 1;
-    margin-left: 10px; /* Deixar espaço para a barra lateral */
-    padding: 60px;
+    margin-left: 150px; /* Deixar espaço para a barra lateral */
+    padding: 70px; /* Ajuste do padding para não ficar colado no header */
     margin-top: 10px; /* Ajustado para ficar próximo ao cabeçalho */
     background-color: #fff;
     min-height: 100vh; /* Garante que o main ocupe toda a altura */
-    overflow-y: auto;
+    overflow-y: auto; /* Adiciona rolagem caso o conteúdo ultrapasse a altura */
 }
 
 main h1 {
@@ -137,7 +137,8 @@ main h1 {
 }
 
 /* Ajuste do botão de pesquisar e incluir para verde escuro */
-.btn-search, .btn-add {
+.btn-search,
+.btn-add {
     background-color: #006400; /* Verde escuro */
     color: white;
     padding: 10px 20px;
@@ -147,7 +148,8 @@ main h1 {
     cursor: pointer;
 }
 
-.btn-search:hover, .btn-add:hover {
+.btn-search:hover,
+.btn-add:hover {
     background-color: #004b23; /* Tom mais escuro ao passar o mouse */
 }
 
@@ -160,7 +162,6 @@ main h1 {
     display: flex;
     justify-content: flex-end;
     gap: 0px;
-
 }
 
 .input-search {
@@ -171,12 +172,10 @@ main h1 {
     margin-right: 20px;
 }
 
-
-
 /* Melhorando a responsividade da página */
 @media (max-width: 768px) {
     aside {
-        display: none;
+        display: none; /* Oculta a barra lateral em telas pequenas */
     }
 
     header {
@@ -189,7 +188,7 @@ main h1 {
     }
 
     .table-responsive {
-        overflow-x: auto;
+        overflow-x: auto; /* Permite rolagem horizontal em tabelas grandes */
     }
 
     .row.justify-content-between .col-md-6 {
@@ -197,7 +196,9 @@ main h1 {
         gap: 10px; /* Espaço extra entre os botões ao empilhar */
     }
 
-    .btn-search, .btn-add {
-        width: 100%;
+    .btn-search,
+    .btn-add {
+        width: 100%; /* Botões ocupam toda a largura em telas pequenas */
     }
 }
+
