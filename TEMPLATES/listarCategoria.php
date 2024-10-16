@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categorias - Sistema Intranet</title>
-    <link rel="stylesheet" href="../CSS/style1.css"> <!-- Adicione seu arquivo de estilo aqui -->
+    <link rel="stylesheet" href="../CSS/style.css"> <!-- Adicione seu arquivo de estilo aqui -->
 </head>
 <body>
     <div class="container">
