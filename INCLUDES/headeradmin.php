@@ -1,5 +1,5 @@
 <header>
-    <div class="logo">
+    <div class="logo" style="margin-top: 0";>
         <img src="../IMAGES/logo.jpeg" alt="Logo"> <!-- Substitua pelo caminho da imagem da logo -->
     </div>
     <div class="user-info">
@@ -22,7 +22,7 @@
             <li><a href="#">Medidas</a></li>
             <li><a href="#">Metas</a></li>
             <li><a href="../TEMPLATES/listarReceitas.php">Receitas</a></li>
-            <li><a href="../TEMPLATES/ListarRestaurante.php">Restaurante</a></li>
+            <li><a href="../TEMPLATES/listarRestaurante.php">Restaurante</a></li>
         </ul>
     </nav>
 </aside>

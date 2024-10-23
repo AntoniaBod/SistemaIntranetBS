@@ -1,16 +1,18 @@
-/* Estilos para o Header */
-/* styleHeader.css */
+/* Ajuste para o body */
 body {
+    display: flex;
     font-family: Arial, sans-serif;
-    background-color: #f3f3f3;
+    background-color: #fff;
     margin: 0;
     padding: 0;
+    overflow-y: hidden; /* Evita que a barra de rolagem apareça sempre */
 }
 
+/* Estilo para o header fixo */
 header {
     width: 100%;
-    height: 70px;
-    background-color: #b30000;
+    height: 60px;
+    background-color: #b02727;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,20 +21,19 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    z-index: 10; /* Para garantir que o header fique acima de outros elementos */
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
 }
 
+/* Estilo para a barra lateral (aside) */
 aside {
-    width: 150px;
-    background-color: #b30000;
-    height: calc(100vh - 70px); /* Ajuste da altura da barra lateral para não ultrapassar o header */
+    width: 160px;
+    background-color: #b02727;
+    height: calc(100vh - 60px); /* Ajusta a altura para não ultrapassar o header */
     position: fixed;
-    top: 70px; /* Começa logo abaixo do header */
+    top: 60px; /* Começa logo abaixo do header */
     left: 0;
     text-align: center;
     padding-top: 20px;
-    overflow-y: auto; /* Adiciona rolagem caso o conteúdo ultrapasse a altura */
 }
 
 aside nav ul {
@@ -50,17 +51,16 @@ aside nav ul li a {
     text-decoration: none; /* Remove sublinhado */
 }
 
-/* Adicionando efeito hover nos links */
 aside nav ul li a:hover {
-    text-decoration: underline; /* Sublinha ao passar o mouse */
+    background-color: #006400;
 }
 
 /* Logo */
 header .logo {
-    margin-top: 0px; /* Corrigido para não usar margem em excesso */
+    margin-top: 0px;
     display: flex;
     justify-content: left;
-    width: 100%; /* Garante que a logo ocupe o espaço total da barra */
+    width: 100%;
 }
 
 header .logo img {
@@ -69,22 +69,22 @@ header .logo img {
 }
 
 .user-info {
-    display: flex; /* Alinha itens no user-info */
+    display: flex;
     align-items: center; /* Centraliza verticalmente os itens */
 }
 
 .logout-button {
     padding: 8px 12px;
-    background-color: #f44336; /* Cor de fundo do botão */
-    color: white; /* Cor do texto do botão */
+    background-color: #b02727;
+    color: white;
     border: none;
-    border-radius: 5px; /* Bordas arredondadas */
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    font-size: 16px; /* Tamanho do texto do botão */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .logout-button:hover {
-    background-color: #d32f2f; /* Cor do botão ao passar o mouse */
+    background-color: #d32f2f;
 }
 
 .logout-icon {
@@ -92,18 +92,26 @@ header .logo img {
     height: 30px;
 }
 
+/* Ajuste para o main */
 main {
-    flex: 1;
-    margin-left: 150px; /* Deixar espaço para a barra lateral */
-    padding: 70px; /* Ajuste do padding para não ficar colado no header */
-    margin-top: 10px; /* Ajustado para ficar próximo ao cabeçalho */
-    background-color: #fff;
-    min-height: 100vh; /* Garante que o main ocupe toda a altura */
-    overflow-y: auto; /* Adiciona rolagem caso o conteúdo ultrapasse a altura */
+    margin: 0; /* Remove qualquer margem */
+    padding: 25px 0; /* Ajusta o padding para que não haja espaço nas laterais */
+    margin-top: 60px; /* Espaço para o header */
+    background-color: #e9bfbf;
+    height: calc(100vh - 60px); /* Altura total da janela menos o header */
+    width: calc(100vw - 160px); /* Largura do main menos a largura do aside */
+    overflow-y: auto; /* Permite rolagem vertical */
+    box-sizing: border-box; /* Garante que o padding não afete a largura */
+}
+
+/* Contêiner para o conteúdo dentro do main */
+.content {
+    height: 100%;
+    overflow-y: auto;
 }
 
 main h1 {
-    color: #b30000;
+    color: #b02727;
 }
 
 .input-group {
@@ -145,12 +153,11 @@ main h1 {
     border-radius: 5px;
     border: none;
     font-weight: bold;
-    cursor: pointer;
 }
 
 .btn-search:hover,
 .btn-add:hover {
-    background-color: #004b23; /* Tom mais escuro ao passar o mouse */
+    background-color: chocolate; /* Tom mais escuro ao passar o mouse */
 }
 
 /* Posicionando os botões de pesquisar e incluir à direita, um ao lado do outro */
@@ -158,7 +165,7 @@ main h1 {
     justify-content: space-between; /* Espaça adequadamente os elementos */
 }
 
-.row.justify-content-between .col-md-6 {
+.row.justify-content-between .col-md-4 {
     display: flex;
     justify-content: flex-end;
     gap: 0px;
@@ -188,7 +195,7 @@ main h1 {
     }
 
     .table-responsive {
-        overflow-x: auto; /* Permite rolagem horizontal em tabelas grandes */
+        overflow-x: hidden; /* Remove a rolagem horizontal em tabelas grandes */
     }
 
     .row.justify-content-between .col-md-6 {
@@ -201,4 +208,3 @@ main h1 {
         width: 100%; /* Botões ocupam toda a largura em telas pequenas */
     }
 }
-
